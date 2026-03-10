@@ -1,0 +1,8 @@
+//
+// Created by MECHREVO on 2026/3/10.
+//
+
+#ifndef GATESERVER_CONST_H
+#define GATESERVER_CONST_H
+
+#endif //GATESERVER_CONST_H
