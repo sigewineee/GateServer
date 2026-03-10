@@ -14,6 +14,7 @@ add_executable(GateServer main.cpp
         HttpConnection.h
         Singleton.h
         LogicSystem.cpp
-        LogicSystem.h)
+        LogicSystem.h
+        const.h)
 
 target_link_libraries(GateServer ws2_32 mswsock)

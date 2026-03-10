@@ -1,6 +1,4 @@
-#include <iostream>
-#include <boost/asio/io_context.hpp>
-#include <boost/asio/signal_set.hpp>
+#include "const.h"
 
 #include "CServer.h"
 
@@ -22,6 +20,7 @@ int main()
         });
 
         std::make_shared<CServer>(ioc,port)->Start();
+        std::cout<<"GateServer listen on port "<<port<<std::endl;
         ioc.run();
     }catch (std::exception const &e)
     {

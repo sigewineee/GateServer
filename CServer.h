@@ -5,10 +5,8 @@
 #ifndef GATESERVER_CSERVER_H
 #define GATESERVER_CSERVER_H
 
-#include <boost/beast/http.hpp>
-#include <boost/beast.hpp>
-#include <boost/asio.hpp>
-#include <memory>
+#include "const.h"
+
 
 
 class CServer :public std::enable_shared_from_this<CServer>
@@ -22,9 +20,6 @@ private:
     boost::asio::io_context& _ioc;
     boost::asio::ip::tcp::acceptor _acceptor;
     boost::asio::ip::tcp::socket _socket;
-
-
-
 
 };
 
