@@ -1,0 +1,14 @@
+//
+// Created by MECHREVO on 2026/3/12.
+//
+
+#ifndef GATESERVER_VERIFYGRPCCLIENT_H
+#define GATESERVER_VERIFYGRPCCLIENT_H
+
+
+class VerifyGrpcClient
+{
+};
+
+
+#endif //GATESERVER_VERIFYGRPCCLIENT_H
