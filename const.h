@@ -20,6 +20,9 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <sstream>
+#include <boost/filesystem.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
 
 enum  ErrorCodes
 {
@@ -28,6 +31,7 @@ enum  ErrorCodes
     RPCFailed =1002
 };
 
-
+class ConfigMgr;
+extern ConfigMgr gCFgMgr;
 
 #endif //GATESERVER_CONST_H

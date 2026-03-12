@@ -4,6 +4,7 @@
 
 #include "LogicSystem.h"
 #include "HttpConnection.h"
+#include "VerifyGrpcClient.h"
 
 LogicSystem::~LogicSystem()
 {
@@ -78,9 +79,9 @@ LogicSystem::LogicSystem()
         // 获取 email 字段
         auto email = src_root.get<std::string>("email", "");
         std::cout << "email is " << email << std::endl;
-
+        GetVarifyRsp rsp = VerifyGrpcClient::GetInst()->GetVarifyCode(email);
         // 构建响应
-        root.put("error", 0);
+        root.put("error", rsp.error());
         root.put("email", src_root.get<std::string>("email", ""));
 
         // 将 ptree 转换为 JSON 字符串

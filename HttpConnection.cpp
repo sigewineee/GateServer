@@ -72,7 +72,7 @@ void HttpConnection::HandleReq()
     _response.keep_alive(false);
     if (_request.method() == boost::beast::http::verb::get)
     {
-        PreParseGetParam();
+        PreParseGetParam();     //处理get
         bool success = LogicSystem::GetInst()->HandleGet(_get_url,shared_from_this());
         if (!success)
         {
