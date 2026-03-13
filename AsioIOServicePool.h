@@ -1,0 +1,14 @@
+//
+// Created by MECHREVO on 2026/3/12.
+//
+
+#ifndef GATESERVER_ASIOIOSERVICEPOOL_H
+#define GATESERVER_ASIOIOSERVICEPOOL_H
+
+
+class AsioIOServicePool
+{
+};
+
+
+#endif //GATESERVER_ASIOIOSERVICEPOOL_H
