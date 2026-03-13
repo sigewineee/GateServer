@@ -9,7 +9,7 @@
 #include "logicSystem.h"
 
 
-HttpConnection::HttpConnection(boost::asio::ip::tcp::socket socket):_socket(std::move(socket))
+HttpConnection::HttpConnection(boost::asio::io_context &ioc):_socket(ioc)
 {
 
 }
@@ -37,6 +37,11 @@ void HttpConnection::Start()
         }
 
     });
+}
+
+boost::asio::ip::tcp::socket& HttpConnection::GetSocket()
+{
+    return _socket;
 }
 
 void HttpConnection::CheckDeadline()

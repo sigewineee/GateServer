@@ -58,13 +58,16 @@ public:
         this->_config_map = src._config_map;
     };
 
+
+
+    static ConfigMgr& GetInst();
+
+
+private:
     ConfigMgr(const ConfigMgr& src) {
         this->_config_map = src._config_map;
     }
-
     ConfigMgr();
-private:
-
     // 存储section和key-value对的map
     std::map<std::string, SectionInfo> _config_map;
 };

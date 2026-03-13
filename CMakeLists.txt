@@ -40,6 +40,8 @@ add_executable(GateServer
         VerifyGrpcClient.h
         ConfigMgr.cpp
         ConfigMgr.h
+        AsioIOServicePool.cpp
+        AsioIOServicePool.h
 )
 
 target_link_libraries(GateServer

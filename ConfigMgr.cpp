@@ -7,6 +7,13 @@
 #include "const.h"
 
 
+ConfigMgr& ConfigMgr::GetInst()
+{
+    static ConfigMgr _Cfgmgr;
+    return _Cfgmgr;
+
+}
+
 ConfigMgr::ConfigMgr(){
     // 获取当前工作目录
     boost::filesystem::path current_path = boost::filesystem::current_path();

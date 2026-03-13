@@ -18,6 +18,28 @@ using message::GetVarifyReq;
 using message::GetVarifyRsp;
 using message::VarifyService;
 
+class RPCConPool
+{
+public:
+    RPCConPool(size_t poolsize ,std::string host ,std::string port);
+    ~RPCConPool();
+    void Close();
+    std::unique_ptr<VarifyService::Stub> getConnection();
+    void returnConnection(std::unique_ptr<VarifyService::Stub> context);
+
+private:
+    std::atomic<bool> _b_stop;
+    size_t _poolSize;
+    std::string _host;
+    std::string _port;
+    std::queue<std::unique_ptr<VarifyService::Stub>> _connections;
+    std::mutex _mtx;
+    std::condition_variable _cv;
+};
+
+
+
+
 class VerifyGrpcClient :public Singleton<VerifyGrpcClient>
 {
     friend class Singleton<VerifyGrpcClient>;
@@ -28,28 +50,25 @@ public:
         GetVarifyRsp reply;
         GetVarifyReq request;
         request.set_email(email);
-
-        Status status = stub_ ->GetVarifyCode(&context,request,&reply) ;
+        auto stub = _pool->getConnection();
+        Status status = stub ->GetVarifyCode(&context,request,&reply) ;
         if (status.ok())
         {
+            _pool->returnConnection(std::move(stub));
             return reply;
         }
         else
         {
             reply.set_error(ErrorCodes::RPCFailed);
+            _pool->returnConnection(std::move(stub));
             return reply;
         }
 
     }
+    std::unique_ptr<RPCConPool> _pool;
 
 private:
-    VerifyGrpcClient()
-    {
-        std::shared_ptr<Channel> channel = grpc::CreateChannel("0.0.0.0:50051",
-            grpc::InsecureChannelCredentials());
-        stub_ = VarifyService::NewStub(channel);
-    }
-    std::unique_ptr<VarifyService::Stub> stub_;
+    VerifyGrpcClient();
 
 
 };
